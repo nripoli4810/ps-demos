@@ -88,7 +88,7 @@ class Battle extends React.Component {
         this.setState(function () {
             var newState = {}
             newState[id + 'Name'] = ''
-            newState[id + 'Image'] = ''
+            newState[id + 'Image'] = null
             return newState
         })
     }
@@ -115,7 +115,7 @@ class Battle extends React.Component {
                         <PlayerPreview
                             avatar={playerOneImage}
                             username={playerOneName} >
-                            <button className='reset' onClick={this.handleReset.bind(null, "playerOne")} >
+                            <button className='reset' onClick={this.handleReset.bind(this, "playerOne")} >
                                 Reset
                             </button>
                         </PlayerPreview>
@@ -131,7 +131,7 @@ class Battle extends React.Component {
                         <PlayerPreview
                             avatar={playerTwoImage}
                             username={playerTwoName} >
-                            <button className='reset' onClick={this.handleReset.bind(null, 'playerTwo')} >
+                            <button className='reset' onClick={this.handleReset.bind(this, 'playerTwo')} >
                                 Reset
                             </button>
                         </PlayerPreview>
