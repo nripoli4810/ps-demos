@@ -2,27 +2,7 @@ var React = require('react')
 var PropTypes = require('prop-types')
 var Link = require('react-router-dom').Link
 
-
-function PlayerPreview(props) {
-    return (
-        <div>
-            <div className='column' >
-                <img className='avatar' src={props.avatar} alt={'Avatar for' + props.username} />
-                <h2 className='username'>@{props.username}</h2>
-            </div>
-            <button className='reset' onClick={props.onReset.bind(null, props.id)} >
-                Reset
-            </button>
-        </div>
-    )
-}
-
-PlayerPreview.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    onReset: PropTypes.func.isRequired
-}
+var PlayerPreview = require('./PlayerPreview')
 
 class PlayerInput extends React.Component {
     constructor(props) {
@@ -39,7 +19,7 @@ class PlayerInput extends React.Component {
     handleChange(event) {
         var value = event.target.value;
 
-        this.setState(function() {
+        this.setState(function () {
             return {
                 username: value
             }
@@ -56,11 +36,11 @@ class PlayerInput extends React.Component {
         return (
             <form className='column' onSubmit={this.handleSubmit}>
                 <label className='header' htmlFor='username'>{this.props.label}</label>
-                <input id='username' 
-                    placeholder='Github User Name' 
-                    type='text' 
-                    value={this.state.username} 
-                    autoComplete='off' 
+                <input id='username'
+                    placeholder='Github User Name'
+                    type='text'
+                    value={this.state.username}
+                    autoComplete='off'
                     onChange={this.handleChange} />
                 <button className='button' type='submit' disabled={!this.state.username} >
                     Submit
@@ -126,42 +106,46 @@ class Battle extends React.Component {
             <div>
                 <div className='row'>
                     {!playerOneName &&
-                        <PlayerInput id='playerOne' 
-                            label='Player ONE' 
+                        <PlayerInput id='playerOne'
+                            label='Player ONE'
                             onSubmit={this.handleSubmit} />
                     }
 
                     {playerOneImage !== null &&
                         <PlayerPreview
                             avatar={playerOneImage}
-                            username={playerOneName} 
-                            onReset={this.handleReset} 
-                            id="playerOne" />
+                            username={playerOneName} >
+                            <button className='reset' onClick={this.handleReset.bind(null, "playerOne")} >
+                                Reset
+                            </button>
+                        </PlayerPreview>
                     }
 
                     {!playerTwoName &&
-                        <PlayerInput id='playerTwo' 
-                            label='Player TWO' 
+                        <PlayerInput id='playerTwo'
+                            label='Player TWO'
                             onSubmit={this.handleSubmit} />
                     }
 
                     {playerTwoImage !== null &&
                         <PlayerPreview
                             avatar={playerTwoImage}
-                            username={playerTwoName} 
-                            onReset={this.handleReset} 
-                            id="playerTwo" />
+                            username={playerTwoName} >
+                            <button className='reset' onClick={this.handleReset.bind(null, 'playerTwo')} >
+                                Reset
+                            </button>
+                        </PlayerPreview>
                     }
                 </div>
 
-                {playerOneImage&& playerTwoImage &&
-                        <Link className='button' to={
-                            {
-                                pathname: match.url + '/results',
-                                search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
-                            }
-                        }>
-                            Battle
+                {playerOneImage && playerTwoImage &&
+                    <Link className='button' to={
+                        {
+                            pathname: match.url + '/results',
+                            search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+                        }
+                    }>
+                        Battle
                         </Link>
                 }
             </div>
