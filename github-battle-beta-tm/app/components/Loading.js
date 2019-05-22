@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const styles = {
     content: {
-        fontSize: '35px', 
+        fontSize: '35px',
         position: 'absolute',
         left: '0',
         right: '0',
@@ -13,14 +13,11 @@ const styles = {
 }
 
 export default class Loading extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            content: this.props.text,
-            speed: this.props.speed
-        }
+    state = {
+        content: this.props.text,
+        speed: this.props.speed
     }
+
 
     componentDidMount() {
         const { content, speed } = this.state

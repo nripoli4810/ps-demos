@@ -34,22 +34,17 @@ function Instructions() {
 }
 
 class PlayerInput extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = ({ username: '' });
-
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+    state = {
+        username: ''
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault()
 
         this.props.onSubmit(this.state.username)
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             username: event.target.value
         })
@@ -90,27 +85,27 @@ PlayerInput.propTypes = {
 function PlayerPreview({ username, onReset, label }) {
     return (
         <ThemeConsumer>
-            {({theme}) => (
+            {({ theme }) => (
                 <div className='column player'>
-                <h3 className='player-label'>{label}</h3>
-                <div className={`row bg-${theme}`}>
-                    <div className='player-info'>
-                        <img className='avatar-small'
-                            src={`https://github.com/${username}.png?size=200`}
-                            alt={`Avatar for ${username}`} />
-                        <a href={`https://github.com/${username}`}
-                            className='link'>
-                            {username}
-                        </a>
+                    <h3 className='player-label'>{label}</h3>
+                    <div className={`row bg-${theme}`}>
+                        <div className='player-info'>
+                            <img className='avatar-small'
+                                src={`https://github.com/${username}.png?size=200`}
+                                alt={`Avatar for ${username}`} />
+                            <a href={`https://github.com/${username}`}
+                                className='link'>
+                                {username}
+                            </a>
+                        </div>
+                        <button className='btn-clear flex-center' onClick={onReset}>
+                            <FaTimesCircle color='rgb(194, 57, 42)' size={26} />
+                        </button>
                     </div>
-                    <button className='btn-clear flex-center' onClick={onReset}>
-                        <FaTimesCircle color='rgb(194, 57, 42)' size={26} />
-                    </button>
                 </div>
-            </div>        
             )}
         </ThemeConsumer>
-        
+
     )
 }
 
@@ -121,25 +116,18 @@ PlayerPreview.propTypes = {
 }
 
 export default class Battle extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            playerOne: null,
-            playerTwo: null,
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleReset = this.handleReset.bind(this)
+    state = {
+        playerOne: null,
+        playerTwo: null,
     }
 
-    handleSubmit(id, player) {
+    handleSubmit = (id, player) => {
         this.setState({
             [id]: player
         })
     }
 
-    handleReset(id) {
+    handleReset = (id) => {
         this.setState({
             [id]: null
         })
@@ -172,7 +160,7 @@ export default class Battle extends React.Component {
                     </div>
                     {playerOne && playerTwo && (
                         <Link className='btn dark-btn btn-space'
-                        to={{
+                            to={{
                                 pathname: '/battle/results/',
                                 search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`
                             }}>
