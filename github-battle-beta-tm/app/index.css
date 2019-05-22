@@ -246,7 +246,7 @@ li {
 }
 
 .bg-dark {
-    background: rgb(36,40,42);
+    background: rgb(36, 40, 42);
     border-radius: 3px;
 }
 
@@ -263,4 +263,12 @@ li {
 .light-btn:disabled {
     color: #4a4a4a;
     background: #292929;
+}
+
+.space-between {
+    justify-content: space-between
+}
+
+.nav li {
+    margin-right: 10px;
 }
