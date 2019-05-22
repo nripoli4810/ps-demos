@@ -27,7 +27,7 @@ export default class Loading extends React.Component {
 
         this.internval = window.setInterval(() => {
             this.state.content === content + '...'
-                ? this.setState({ content: text })
+                ? this.setState({ content: content })
                 : this.setState(({ content }) => ({ content: content + '.' }))
         }, speed)
     }
