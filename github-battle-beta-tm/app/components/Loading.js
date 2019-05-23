@@ -18,7 +18,6 @@ export default class Loading extends React.Component {
         speed: this.props.speed
     }
 
-
     componentDidMount() {
         const { content, speed } = this.state
 
